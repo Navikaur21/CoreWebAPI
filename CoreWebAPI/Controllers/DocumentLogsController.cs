@@ -66,14 +66,7 @@ namespace CoreWebAPI.Controllers
                 return ValidationProblem(ModelState);
             }
             var fileblob = await _docService.GetDocAsync(documentLog.Name);
-            var localfilePath = Path.GetTempFileName().Replace(".tmp", ".pdf");//storing the file locally 
-            using (var fileStream = System.IO.File.Create(localfilePath))
-            {
-                fileblob.Content.CopyTo(fileStream);
-            }
-            if (!System.IO.File.Exists(localfilePath)) return NotFound();
-            var stream = new FileStream(localfilePath, FileMode.Open);
-            return new FileStreamResult(stream, fileblob.ContentType);
+            return new FileStreamResult((Stream)fileblob.Content, fileblob.ContentType);
         }
         [HttpPost("Upload")]
         public async Task<IActionResult> UploadDocument()
