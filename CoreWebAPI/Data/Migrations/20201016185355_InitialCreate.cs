@@ -8,7 +8,7 @@ namespace CoreWebAPI.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "DocumentLog",
+                name: "DocumentList",
                 columns: table => new
                 {
                     DocumentID = table.Column<int>(nullable: false)
